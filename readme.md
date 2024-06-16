@@ -42,18 +42,18 @@ La prochaine étape serait la création d'un Dashboard pour la visualisation des
 
 🔗 Lien vers une présentation du projet: https://github.com/Freymat/ICAM_Projet_Integration_donnees
 
-## ⛁ 2. Nettoyage et préparation des données issues de l'API de Sefaria.org. Stage
+## ⛁ 2. Nettoyage et préparation des données issues de l'API de Sefaria.org. Stage à l'Ecole Pratique des Hautes Etudes (EPHE), projet ERC Synergy MiDRASH.
 ### 🎯 Objectifs et conduite du projet
 
 L'objectif de notre stage était la création d'un pipeline de données, permettant la création auto-supervisée de vérité de terrain pour l'entraînement des modèles de reconnaissance optique de caractères (OCR) dans le cadre du projet ERC Synergy MiDRASH (Migrations of Textual and Scribal Traditions via Large-Scale Computational Analysis of Medieval Manuscripts in Hebrew Script).
 
-Le pipeline que nous avons créé (et qui est détaillé dans la partie ***#REF!!!***) recherche des correspondances entre les transcriptions de milliers de manuscrits et imprimés obtenus grâce à des modèles d'OCR (eScriptorium/Kraken) et des centaines de textes historiques complets provenant de l'API de Sefaria.org. Ces correspondances peuvent alors être utilisées comme vérité de terrain pour l'entraînement des modèles d'OCR.
+Le pipeline que nous avons créé (qui est détaillé dans la partie [Analyse des données - 1. Création auto-supervisée de vérité de terrain par méthodes algorithmiques](https://github.com/Freymat/portfolio_formation_Data_Science_ICAM_2023_2024#-1-cr%C3%A9ation-auto-supervis%C3%A9e-de-v%C3%A9rit%C3%A9-de-terrain-par-m%C3%A9thodes-algorithmiques), et dont le code est disponible sur notre repo github [à cette adresse](https://github.com/Freymat/from_eScriptorium_to_Passim_and_back)) recherche des correspondances entre les transcriptions de milliers de manuscrits et imprimés obtenus grâce à des modèles d'OCR ([eScriptorium](https://gitlab.com/scripta/escriptorium) / [Kraken](https://kraken.re/main/index.html)) et des centaines de textes historiques complets provenant de l'API de [Sefaria.org](https://www.sefaria.org/texts). Ces correspondances peuvent alors être utilisées comme vérité de terrain pour l'entraînement des modèles d'OCR.
 
-Dans un premier temps, il a fallu collecter un grand nombre de textes complets à partir de l'API de Sefaria.org, un site web mettant à disposition un grand nombre de de textes juifs en hébreu, ainsi que leurs traductions en différentes langues (Tanakh, Talmud, Midrash, etc.)
+Dans un premier temps, il a fallu collecter un grand nombre de textes complets à partir de l'API de Sefaria.org, un site web mettant à disposition des textes juifs en hébreu, ainsi que leurs traductions en différentes langues (Tanakh, Talmud, Midrash, etc.)
 
 Une API permet d'accéder à ces textes (https://developers.sefaria.org/).
 
-Les textes y sont disponibles sous forme de fichiers JSON, et proposent différents types de structures:
+Les textes y sont disponibles sous forme de fichiers JSON, architecturés de façons diverses:
 - structure simple: le texte est architecturé en sections (chapitres), et sous-sections (versets, sous-versets...)
 ```python
 [
@@ -76,7 +76,6 @@ Les textes y sont disponibles sous forme de fichiers JSON, et proposent différe
 La structure de ces textes peut atteindre des degrés de complexité élevés, car en outre du texte, ils contiennent par exemple des commentaires:
 ![alt text](Sefaria/complexe_node_arbanel.png)
 
-
 *Structure du livre d'Abarbanel sur la Torah (https://developers.sefaria.org/docs/the-schema-of-a-complex-text)*
 
 Nous avons donc mis en place un script Python pour télécharger ces textes automatiquement, les nettoyer, les concaténer, les indexer, et les préparer pour leur utilisation comme vérité de terrain.
@@ -87,8 +86,7 @@ Les textes ont ensuite été concaténés et enregistrés dans des fichiers text
 
 ![alt text](Sefaria/index_books.png)
 
-Ce sont plus de 150 textes qui ont été téléchargés, nettoyés, concaténés et indexés., prêts à être utilisés comme vérité de terrain pour la recherche algorithmique d'alignement avec les résultats de l'OCR des manuscrits et imprimés. Ce travail est présenté ci-dessous (***###REF***)
-
+Ce sont plus de 150 textes qui ont été téléchargés, nettoyés, concaténés et indexés., prêts à être utilisés comme vérité de terrain pour la recherche algorithmique d'alignement avec les résultats de l'OCR des manuscrits et imprimés. Ce travail est présenté ci-dessous.
 
 
 ### 🛠️ Moyens et outils
@@ -102,20 +100,18 @@ https://github.com/Freymat/from_Sefaria_to_Passim
 
 
 # 🔎 Analyse des données
-- Python
-- statistiques
-- ML
 
-## 🔎 1. Création auto-supervisée de vérité de terrain par méthodes algorithmiques
+
+## 🔎 1. Création auto-supervisée de vérité de terrain par méthodes algorithmiques. Stage à l'EPHE, projet MiDRASH.
 
 ### 🎯 Objectifs et conduite du projet
-L'objectif premier de mon stage consistait à mettre en place un pipeline permettant la production de grandes quantités de vérité de terrain pour l'entraînement des modèles de reconnaissance optique de caractères (OCR) dans le cadre du projet ERC Synergy MiDRASH (Migrations of Textual and Scribal Traditions via Large-Scale Computational Analysis of Medieval Manuscripts in Hebrew Script).
+L'objectif premier de mon stage consistait à mettre en place un pipeline permettant la production de grandes quantités de vérité de terrain pour l'entraînement des modèles de reconnaissance optique de caractères (OCR) dans le cadre du projet [ERC Synergy MiDRASH](https://escripta.hypotheses.org/500) (Migrations of Textual and Scribal Traditions via Large-Scale Computational Analysis of Medieval Manuscripts in Hebrew Script).
 
-Pour entraîner les modèles d'OCR, il est nécessaire de disposer de vérité de terrain, c'est-à-dire de transcriptions manuelles des textes à reconnaître. Ces transcriptions peuvent être obtenues par saisie manuelle, mais cela est très coûteux en temps et en ressources humaines.
+Pour entraîner les modèles d'OCR, il est nécessaire de disposer de vérité de terrain, c'est-à-dire de transcriptions des textes à reconnaître. Ces transcriptions peuvent être obtenues par saisie manuelle, mais cela est très coûteux en temps et en ressources humaines.
 
-Nous avons donc mis en place un pipeline de production de vérité de terrain auto-supervisée, qui permet de comparer les transcriptions obtenues par les modèles d'OCR (obtenus grâce aux outils Kraken et eScriptorium) avec des textes complets provenant de l'API de Sefaria.org, et d'en extraire des correspondances. Ces correspondances peuvent alors être utilisées comme vérité de terrain pour l'entraînement des modèles d'OCR.
+Nous avons donc mis en place un pipeline de production de vérité de terrain auto-supervisée, qui permet de comparer les transcriptions obtenues par les modèles d'OCR (obtenus grâce aux outils Kraken et eScriptorium) avec des textes complets provenant de l'[API de Sefaria.org](https://developers.sefaria.org/), et d'en extraire des correspondances. Ces correspondances peuvent alors être utilisées comme vérité de terrain pour l'entraînement des modèles d'OCR.
 
-eScriptorium est une plateforme en ligne de gestion de manuscrits et de documents anciens, [développée par l'École Pratique des Hautes Études (EPHE)](https://classics-at.chs.harvard.edu/classics18-stokes-kiessling-stokl-ben-ezra-tissot-gargem/). Il est basé sur le logiciel de reconnaissance optique de caractères (OCR) Kraken, qui utilise des réseaux de neurones pour la reconnaissance de caractères s'adaptant à un très grand nombre de scripts.
+eScriptorium est une plateforme en ligne de gestion de manuscrits et de documents anciens, [développée par l'École Pratique des Hautes Études (EPHE)](https://classics-at.chs.harvard.edu/classics18-stokes-kiessling-stokl-ben-ezra-tissot-gargem/). Il est basé sur le logiciel de reconnaissance optique de caractères (segmentation et transcription,  HTR/OCR) [Kraken](https://kraken.re/main/index.html), qui utilise des réseaux de neurones pour la reconnaissance de caractères s'adaptant à un très grand nombre de scripts.
 
 Le pipeline que nous avons créé est composé de plusieurs étapes:
 1) Collecte des transcriptions des manuscrits et imprimés obtenues par les modèles d'OCR (eScriptorium/Kraken).
@@ -132,18 +128,7 @@ Tous ces outils sont décrits sur le dépôt github du projet: https://github.co
 
 Le pipeline se présente sous la forme d'un script python, qui peut être déployé sur différents types de machines (ordinateurs personnels, clusters de calcul). La procédure d'installation est décrite.  Il a été testé sur des ordinateurs personnels, des machines virtuelles, et des clusters de calcul (cluster de calcul de l'in2p3). Il est actuellement en cours de déploiement sur le cluster de calcul du projet MiDRASH.
 
-Actuellement, nous utilisions le pipeline sur des batchs de 7000 manuscrits que nous croisons avec plus de 150 textes numérique. 
-
-**Travaux pour la suite:**
-- Diminuer le temps de calcul lors de la création des fichiers .tsv de synthèse des résultats, en parallélisant le traitement des jsons (avec apache spark par exemple).
-- Analyse fine des clusters de lignes alignées successivement, afin d'identifier les erreurs les plus fréquentes du modèle d'OCR (tableau de confusion).
-
-
-
-
-
-
-
+> Actuellement, nous utilisons le pipeline sur des batchs de 45.000 pages de manuscrits que nous croisons avec plus de 150 textes numérique, pour une durée de traitement inférieur à 45 minutes.
 
 ### 🛠️ Moyens et outils
 - Python, Jupyter notebook, environnement virtuel (conda)
@@ -157,9 +142,9 @@ Actuellement, nous utilisions le pipeline sur des batchs de 7000 manuscrits que 
 ## 🔎 2. Analyse du contenu de la base de données openfoodfacts.
 ### 🎯 opérations  et conditions:     
 Dans le cadre du projet 'Data Analyst: de l'intégration à l'industrialisation', j'ai travaillé sur l'analyse des données de la base de données Openfoodfacts, étape indispensable à la réalisation de la classification des allergènes dans les produits alimentaires.
-Nous détaillons au prochain point (***###REF***) la classification des allergènes dans les produits alimentaires de la base de données Openfoodfacts. Ici nous nous concentrons sur l'analyse des données de la base de données.
+Nous détaillons au prochain point ([Analyse des données - 3. Classification d'allergènes](ce_ICAM_2023_2024?tab=readme-ov-file#-3-classification-dallergènes-dans-les-produits-alimentaires-de-la-base-de-données-openfoodfacts)) la classification des allergènes dans les produits alimentaires de la base de données Openfoodfacts. Ici nous nous concentrons sur l'analyse des données de la base de données.
 
-Cette partie d'exploration nous a permis d'en comprendre le contenu, la structure et la qualité. Mais surtout de **construire avec la diététicienne nutritionniste** le projet d'application en lui exposant le contenu de la base, et d'en estimer la faisabilité sur la base des données disponibles.
+Cette partie d'exploration nous a permis d'en comprendre le contenu, la structure et la qualité. Mais surtout de **construire avec [une diététicienne nutritionniste](https://dietetique.freyder.fr/)** le projet d'application en lui exposant le contenu de la base, et d'en estimer la faisabilité sur la base des données disponibles.
 
 #### Contenu de la Base de Données :
 
@@ -213,7 +198,7 @@ Ce travail est exposé en détail dans le repository github du projet: https://g
 Ce projet individuel a été réalisé en 10 jours dans le cadre de ma formation en Data Science à l'ICAM . L'objectif était la conception d'une application au service de la santé publique, en proposant une idée innovante d’application en lien avec l’alimentation pour l’agence Santé Publique France. À notre disposition, la base de données Openfoodfacts.
 
 Après avoir interviewé une diététicienne nutritionniste afin d'identifier comment une application basée sur les données de la base Openfoodfacts pourrait répondre aux besoins et aux attentes des professionnels de santé, nous avons choisi de travailler sur la classification des allergènes dans les produits alimentaires.
-(La partie analyse des données de la base de données Openfoodfacts est décrite ci-dessus ***# REF!!!***).
+(La partie analyse des données de la base de données Openfoodfacts est décrite ci-dessus).
 
 L'enquête de terrain a orienté nos travaux vers la conception d'un assistant numérique qui servirait de trait d'union entre le professionnel et le patient, facilitant ainsi la mise en œuvre du régime alimentaire prescrit. Selon elle, un tel assistant pourrait offrir deux fonctionnalités principales :
 
@@ -255,9 +240,9 @@ Quel que soit le modèle de classification utilisé, le principe reste le même 
 - Entraînement du modèle.
 - Évaluation du modèle.
 
-#### Résultats des Modèles de Classification
+#### Résultats des modèles de classification
 
-##### Arbre de Décision
+##### Arbre de décision
 
 Pour utiliser les modèles d'arbre de décision, les données textuelles ont été transformées en données numériques via des techniques de NLP :
 - **Nettoyage, tokenisation, et vectorisation** des données textuelles avec `nltk` et `CountVectorizer` de `sklearn`.
@@ -270,7 +255,7 @@ Après optimisation des hyperparamètres avec `GridSearchCV`, l'arbre de décisi
 En utilisant une méthodologie similaire à celle de l'arbre de décision :
 - Le **MLP classifier** a également atteint un score F1 de **0.87** et un recall de **0.91** pour la classe 0.
 
-##### Conclusion pour les Modèles de Classification Simples
+##### Conclusion pour les modèles de classification simples
 
 - Les résultats sont satisfaisants, mais doivent être améliorés pour éviter les **faux négatifs**, dangereux pour les allergiques.
 - Les modèles ne gèrent pas bien les séquences de mots, problème partiellement contourné par la création de tokens spécifiques (ex. : "glutenfree").
@@ -287,7 +272,7 @@ Résultats des LSTM:
 - Les résultats sont très satisfaisants avec un **recall** allant jusqu'à **0.94** pour la classe 0.
 - Le modèle bidirectionnel a fourni les meilleurs résultats avec un vocabulaire de base de **5000 mots**, ce qui en fait notre modèle préféré.
 
-##### Conclusion générale
+#### Conclusion générale
 
 - L'arbre de décision et le perceptron multicouche ont donné des résultats acceptables, mais insuffisants pour une mise en production.
 - Les réseaux **LSTM** ont montré de meilleures performances, particulièrement le modèle bidirectionnel avec un vocabulaire optimisé.
@@ -301,29 +286,15 @@ Résultats des LSTM:
 
 🔗 Pour rappel: l'ensemble des travaux est disponible sur le dépôt github du projet (rapport, notebooks, présentation): https://github.com/Freymat/ICAM_Projet_Data_Science
 
-Outils utilisés:
-
-- python, conda
-- jupyter notebook, pandas, numpy, nltk, 
-- scikit-learn, tensorflow
-
-
-
-
-
-https://www.kaggle.com/datasets/uciml/default-of-credit-card-clients-dataset
-Default of Credit Card Clients Dataset
-Default Payments of Credit Card Clients in Taiwan from 2005
-Démarche de data story telling
 
 
 # 📊 Visualisation des données
-- techno WEB
-- Chatbot, API IBM
-- Tableau/PowerBI
+
 
 ## 📊 1. Projet Data Visualisation: Dashboard VOD avec Tableau.
 Dans le cadre du projet 'Visualisation des données', j'ai travaillé à la réalisation d'un tableau de bord interactif sur les plateformes de vidéo à la demande (VOD).
+
+![alt text](visualisation-tableau/tableau.png)
 
  L'objectif était la création d'un dashboard interactif avec le programme Tableau de Salesforce. Après **exploration, nettoyage et intégration**, les données devaient être **visualisées** dans un tableau de bord interactif.
 
@@ -348,7 +319,10 @@ Afin d'entraîner les modèles d'OCR, nous avons donc travaillé à la productio
 
 Nous avons utilisé deux outils principaux pour la visualisation des données textuelles :
 - **1) création de dictionnaires (json)** synthétisant les alignements détectés par Passim, pour chaque feuillet de document, et chaque témoin numérique. Ces dictionnaires contiennent les informations sur les alignements (texte, position, score de confiance) et sont utilisables pour l'entraînement des modèles d'OCR.
+
 ![alt text](visualisation_stage/dict_alg.png)
+
+Disponible ici: https://public.tableau.com/app/profile/m.freyder/viz/VOD_17163198511630/Tableaudebord1
 
 Dans cet exemple, chaque dictionnaire contient les informations sur une ligne d'OCR identifiée par son id. Il contient notamment le texte de l'OCR, la position du texte dans le document, la valeur du ratio de Levenshtein, et le texte du témoin numérique aligné. On visualise ainsi les différences entre l'OCR (clé `text`) et le témoin numérique (clé `alg_GT`).
 
@@ -381,9 +355,7 @@ Autre exemple:
 
 
 # 🏭 Industrialisation des données
-- RGPD
-- Gestion de projet informatique
-- 
+
 
 ## 🏭 1. Mise en production d'un pipeline de production auto-supervisée de vérité de terrain 
 À l'issue de la phase de développement du pipeline de production de vérité de terrain, nous avons travaillé à sa mise en production.
@@ -395,6 +367,18 @@ Le code a été revu par les pairs (développeur full stack senior), et des test
 Les outils de gestion de version git et github ont été utilisés pour la gestion de version du code.
 
 Le pipeline a été déployé sur le cluster de calcul de l'in2p3, sur lequel nous avons opéré des tests grandeur nature.
+
+> L'un des plus grands défis a été **le passage à l'échelle**. Afin de pouvoir traiter les centaines de milliers de pages de manuscrits et imprimés du projet MiDRASH, il a fallu optimiser le code pour réduire les temps de calcul. Plusieurs stratégies ont été mises en place pour réduire les temps de calcul
+
+- parallélisation des tâches dans le code python avec la bibliothèque `concurrent.futures`
+- optimisation des requêtes à l'API d'eScriptorium
+- remplacement de la bibliothèque lxml par des expressions régulières pour le traitement des fichiers xml (reconstruction des alignements dans les fichiers xml alto)
+- utilisation de la bibliothèque `polars` pour la construction des dataframes de synthèse des alignements plutôt que des boucles `for` imbriquées, ou de `pandas`. Là où la construction de .tsv de synthèse avec des boucles prenait plus de 16 heures, elle a été réduite à moins de 2 minutes par la manipulation (aggrégation, fusion ....) de dataframes `polars`.
+
+![alt text](industrialisation-TABA/timings-TABA-n15.png)
+*tableau de synthèse des temps de calcul pour le traitement de 45334 manuscrits, croisés avec 151 ouvrages avec construction de xmls altos de transcription et dataframes de synthèse*
+
+
 
 Notre objectif étant de fournir au projet MiDRASH un outil utile et fonctionnel pour la production de vérité de terrain nous avons veillé à ce que le code soit bien documenté. Le code est disponible sur le dépôt github, avec un guide d'utilisation et une documentation complète.
 
