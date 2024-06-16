@@ -1,4 +1,4 @@
-Sélection des pratiques et compétences acquises lors de ma formation en Data Science à l'ICAM Strasbourg-Europe, et lors de mes stages et projets personnels.
+Sélection des pratiques et compétences acquises lors de ma formation en Data Science à l'ICAM Strasbourg-Europe, et lors de mes stages.
 [La formation en Data Science à l'ICAM](https://www.icam.fr/formations-professionnelles/formation-data-scientist/) - de l'intégration à l'industrialisation - forme des professionnels capables de répondre aux besoins des entreprises en matière de traitement et d'analyse de données à niveau Master.
 
 # ⛁ Intégration des données
@@ -179,11 +179,11 @@ Colonnes Clés :
 Les colonnes les plus complétées sont celles contenant des informations obligatoires comme le nom, la marque, le code-barres, et le Nutri-Score.
 Les colonnes contenant des informations facultatives ou plus complexes à renseigner, telles que les additifs, les allergènes, et les nutriments, sont souvent incomplètes. Par exemple, les allergènes ne sont renseignés que pour 8.06% des produits.
 
-##### Visualisation des Données Manquantes :
+##### Visualisation des données manquantes :
 Utilisation de la bibliothèque missingno pour visualiser les valeurs manquantes.
 Cette visualisation a révélé des lacunes significatives dans la complétion des données. Les graphiques montrent que de nombreuses colonnes sont incomplètes, avec des lignes blanches représentant les valeurs manquantes.
 
-##### Problèmes Structurels :
+##### Problèmes structurels :
 La base de données présente des duplications de colonnes, par exemple, certaines informations sont présentes sous plusieurs formes (e.g., 'x', 'x_tags', 'x_en').
 Certaines lignes sont quasi vides, probablement en raison d'une interruption de la saisie par les utilisateurs.
 Les champs 'url' sont lourds et représentent 13% du volume total de la base de données, ce qui pourrait être optimisé pour réduire la taille globale.
@@ -192,7 +192,7 @@ Une réorganisation de la structure de la base de données pourrait améliorer l
 Pour une utilisation en SQL, il serait avantageux de subdiviser la base en plusieurs tables regroupées autour d'une table d'identification (id).
 
 #### Conclusion de cette partie:
-Pour les besoins de notre projet nous avons du ensuite sélectionner les colonnes pertinentes pour la classification des allergènes, et nettoyer les données pour les rendre exploitables. Cette partie est détaillée dans le point suivant (***###REF***).
+Pour les besoins de notre projet, nous avons dû ensuite sélectionner les colonnes pertinentes pour la classification des allergènes, et nettoyer les données pour les rendre exploitables. Cette partie est détaillée dans le point suivant (***###REF***).
 
 
 
@@ -233,7 +233,7 @@ Pour valider notre approche, nous avons choisi de nous concentrer sur un allerg�
 
 L'objectif était donc d'entraîner un modèle de classification capable de prédire la présence de gluten dans un produit alimentaire à partir de sa liste d'ingrédients.
 
- Nous avons selectionné trois architectures de classifieurs, de la plus simple à la plus élaborée: un arbre de décision, un perceptron multicouche (MLPClassifier) et des réseaux de neurones récurrents LSTM (uni et bidirectionnels).
+ Nous avons sélectionné trois architectures de classifieurs, de la plus simple à la plus élaborée: un arbre de décision, un perceptron multicouche (MLPClassifier) et des réseaux de neurones récurrents LSTM (uni et bidirectionnels).
  
 #### Préparation des données
 
@@ -272,7 +272,7 @@ En utilisant une méthodologie similaire à celle de l'arbre de décision :
 
 ##### Conclusion pour les Modèles de Classification Simples
 
-- Les résultats sont satisfaisants mais doivent être améliorés pour éviter les **faux négatifs**, dangereux pour les allergiques.
+- Les résultats sont satisfaisants, mais doivent être améliorés pour éviter les **faux négatifs**, dangereux pour les allergiques.
 - Les modèles ne gèrent pas bien les séquences de mots, problème partiellement contourné par la création de tokens spécifiques (ex. : "glutenfree").
 
 #### Réseaux de Neurones Récurrents LSTM
@@ -287,9 +287,9 @@ Résultats des LSTM:
 - Les résultats sont très satisfaisants avec un **recall** allant jusqu'à **0.94** pour la classe 0.
 - Le modèle bidirectionnel a fourni les meilleurs résultats avec un vocabulaire de base de **5000 mots**, ce qui en fait notre modèle préféré.
 
-##### Conclusion Générale
+##### Conclusion générale
 
-- L'arbre de décision et le perceptron multicouche ont donné des résultats acceptables mais insuffisants pour une mise en production.
+- L'arbre de décision et le perceptron multicouche ont donné des résultats acceptables, mais insuffisants pour une mise en production.
 - Les réseaux **LSTM** ont montré de meilleures performances, particulièrement le modèle bidirectionnel avec un vocabulaire optimisé.
 - De plus, le modèle **LSTM capture mieux les séquences de mots** (ex. : "sans gluten" n'a pas le même sens que "gluten free").
 
@@ -348,8 +348,7 @@ Afin d'entraîner les modèles d'OCR, nous avons donc travaillé à la productio
 
 Nous avons utilisé deux outils principaux pour la visualisation des données textuelles :
 - **1) création de dictionnaires (json)** synthétisant les alignements détectés par Passim, pour chaque feuillet de document, et chaque témoin numérique. Ces dictionnaires contiennent les informations sur les alignements (texte, position, score de confiance) et sont utilisables pour l'entraînement des modèles d'OCR.
-
-![alt text](image-4.png)
+![alt text](visualisation_stage/dict_alg.png)
 
 Dans cet exemple, chaque dictionnaire contient les informations sur une ligne d'OCR identifiée par son id. Il contient notamment le texte de l'OCR, la position du texte dans le document, la valeur du ratio de Levenshtein, et le texte du témoin numérique aligné. On visualise ainsi les différences entre l'OCR (clé `text`) et le témoin numérique (clé `alg_GT`).
 
@@ -357,9 +356,9 @@ Dans cet exemple, chaque dictionnaire contient les informations sur une ligne d'
 Notre pipeline permet la création de fichiers xml alto, contenant les transcriptions basées sur les alignements détectés par Passim et retenus. Ces fichiers peuvent être importés dans eScriptorium pour la visualisation des alignements, et l'entraînement des modèles.
 
 L'image ci-dessous montre les résultats de l'alignement d'un texte (siddur ashkenaz) sur les les lignes d'OCR d'un manuscrit.
-La page de gauche est un scan d'un manuscrit. Le modèle de segmentation a identifié les lignes de texte et les régions de la page. La page de droite visualise la transcription contenant les alignement du Siddur Ashkenaz sur les lignes d'OCR.
+La page de gauche est un scan d'un manuscrit. Le modèle de segmentation a identifié les lignes de texte et les régions de la page. La page de droite visualise la transcription contenant les alignements du Siddur Ashkenaz sur les lignes d'OCR.
 ![alt text](visualisation_stage/siddur.png)
-7 lignes ont ainsi été alignées. Le contenu de ces lignes est présent sur la page de droite, et sont entourés de vert. Les zones vides correspondent aux lignes non alignées.
+7 lignes ont ainsi été alignées. Le contenu de ces lignes est présent sur la page de droite, et est entouré de vert. Les zones vides correspondent aux lignes non alignées.
 Il est possible d'étudier en détail les différences entre l'OCR et l'alignement, en cliquant sur les lignes.
 
 ![alt text](visualisation_stage/transcription_comparison_2.png)
@@ -387,7 +386,7 @@ Autre exemple:
 - 
 
 ## 🏭 1. Mise en production d'un pipeline de production auto-supervisée de vérité de terrain 
-A l'issue de la phase de développement du pipeline de production de vérité de terrain, nous avons travaillé à sa mise en production.
+À l'issue de la phase de développement du pipeline de production de vérité de terrain, nous avons travaillé à sa mise en production.
 
 Après avoir développé le code du pipeline de façon modulaire dans jupyter notebook, nous avons procédé à sa transformation en script python, afin de pouvoir le déployer sur différents types de machines (ordinateurs personnels, clusters de calcul).
 
@@ -403,7 +402,7 @@ Enfin, un accompagnement a été dispensée aux autres membres de l'équipe pour
 
 
 ### 🛠️ Moyens et outils
-- calculateurs en environement Linux
+- calculateurs en environnement Linux
 - python, Jupyter notebook, environnement virtuel (conda)
 - eScriptorium, Kraken, Passim
 - git, github
@@ -416,7 +415,7 @@ Lien vers le projet (et ses branches de développement) : https://github.com/Fre
 ### 🎯 Objectifs et conduite du projet
 Dans le cadre du projet 'Data Scientist: de l'intégration à l'industrialisation', nous avons travaillé avec une diététicienne afin de créer un assistant numérique pour l'aide au suivi des régimes alimentaires prescrits aux patients. Ce projet a débouché sur la création d'une application de classification des allergènes dans les produits alimentaires, basée sur les données de la base Openfoodfacts.
 
-Lors de la phase de conception de l'application, nous avons avons anticipé la mise en production de l'application, afin de nous assurer de la faisabilité technique du projet. La base de données Openfoodfacts est-elle adaptée à notre application ? Quelle solution de base de données est la plus adaptée à notre projet ?
+Lors de la phase de conception de l'application, nous avons anticipé la mise en production de l'application, afin de nous assurer de la faisabilité technique du projet. La base de données Openfoodfacts est-elle adaptée à notre application ? Quelle solution de base de données est la plus adaptée à notre projet ?
 
 En effet la base de données Openfoodfacts est volumineuse (3,069,472 lignes et 206 colonnes en février 2024) nous incitant à réfléchir à la meilleure solution de base de données pour la mise en production de notre application.
 
@@ -424,7 +423,7 @@ Nous avons choisi de comparer les bases de données SQL (MariaDB) et NoSQL (Mong
 
 #### Solution Maria DB (SQL)
 
-Nous avons envisagé de réimporter la base de données sous forme de tables SQL afin de pouvoir la requêter pendant la phase de développement et pourquoi pas de mise en production de notre application. La création de la structure de la table était très fastidieuse en raison du grand nombre de colonnes et de la variété des données. Nous avons du définir de façon précise le type des données de chaque colonne et adapter la longueur des champs pour chaque type de données. Nous avons écris un script python pour la création de la base de données et des tables, et l'import des données grâce à la bibliothèque sqlalchemy (pour la gestion des requêtes SQL de création de la table). Malheureusement, les essais d'import de la base en local ont échoué en raison de la taille de la base impossible à charger en entier. Un important travail de restructuration de la base de données aurait été nécessaire, en la scindant en plusieurs tables, en triant et en nettoyant les données, avec la conception d'un ETL pour la mise à jour régulière des données, ce qui n'était pas envisageable dans le cadre de notre projet.
+Nous avons envisagé de réimporter la base de données sous forme de tables SQL afin de pouvoir la requêter pendant la phase de développement et pourquoi pas de mise en production de notre application. La création de la structure de la table était très fastidieuse en raison du grand nombre de colonnes et de la variété des données. Nous avons dû définir de façon précise le type des données de chaque colonne et adapter la longueur des champs pour chaque type de données. Nous avons écrit un script python pour la création de la base de données et des tables, et l'import des données grâce à la bibliothèque sqlalchemy (pour la gestion des requêtes SQL de création de la table). Malheureusement, les essais d'import de la base en local ont échoué en raison de la taille de la base impossible à charger en entier. Un important travail de restructuration de la base de données aurait été nécessaire, en la scindant en plusieurs tables, en triant et en nettoyant les données, avec la conception d'un ETL pour la mise à jour régulière des données, ce qui n'était pas envisageable dans le cadre de notre projet.
 Cette solution n'a donc pas été retenue, mais nous sommes heureux d'avoir pu explorer cette solution SQL et identifier les avantages et les inconvénients de cette solution.
 
 ![alt text](sql_mongo/SQL.PNG)
@@ -437,7 +436,7 @@ Nous avons donc ensuite investigué la solution MongoDB.
 - scalabilité et haute disponibilité des bases de données NoSQL,
 - toutefois son modèle de données flexible (pas de schéma prédéfini) n'encourage pas à la structuration des données. La base de données souffrant déjà d'un manque de structuration, nous ne pourrons faire l'économie d'un travail de nettoyage et de restructuration de la base en vue de la rendre plus légère.
 
-Afin de tester cette solution, nous avons fait tourner la base de données MongoDB en local sur un système Linux. Nous avons requêté et exploré la base de donnée à l'aide de Compass, l'interface graphique de MongoDB.
+Afin de tester cette solution, nous avons fait tourner la base de données MongoDB en local sur un système Linux. Nous avons requêté et exploré la base de données à l'aide de Compass, l'interface graphique de MongoDB.
 C'est cette solution qui a été retenue pour la mise en production future de notre application.
 
 ![alt text](sql_mongo/mongoDB.PNG)
@@ -454,12 +453,12 @@ https://github.com/Freymat/ICAM_Projet_Data_Science/tree/main/working_notebooks
 ### 🎯 Objectifs et conduite du projet
 
 Dans le cadre du projet IA/Watson de notre formation à l'ICAM, nous avons travaillé sur la conception d'un chatbot documentaire, en utilisant les outils de la plateforme IBM Watson.
-Nous avons appliqué cet outil à une usine de fabrication de roulements à bille.
+Nous avons appliqué cet outil à une usine de fabrication de roulements à billes.
 
 Le chatbot avait pour rôle principal de guider les collaborateurs d'une entreprise sur leur intranet (authentification, ouverture de tickets en cas de problèmes informatiques, etc.). En connectant le chatbot à la base de données documentaire de l'entreprise, nous avons facilité l'accès des collaborateurs aux informations nécessaires via des questions simples posées au chatbot.
 
 Le chatbot a ainsi été connecté à une base de données documentaire factice contenant:
-- Données techniques sur les produits de l'entreprise : Types de roulements à bille, leurs caractéristiques.
+- Données techniques sur les produits de l'entreprise : Types de roulements à billes, leurs caractéristiques.
 - Procédures de fabrication : Normes de qualité, certifications.
 - Procédures de maintenance : Pièces détachées, garanties.
 - Procédures de recyclage, normes environnementales.
@@ -495,7 +494,7 @@ Ce projet a fait l'objet d'une présentation et d'une démo live lors de la sout
 ### 🛠️ Moyens et outils
 Nous avons utilisé la plateforme IBM Watson X :
 
-- Watson Assistant : Pour la création du chatbot.
-- Watson Discovery : Pour l'indexation et la recherche des documents.
+- Watson Assistant : pour la création du chatbot.
+- Watson Discovery : pour l'indexation et la recherche des documents.
 
 

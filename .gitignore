@@ -1,0 +1,4 @@
+# Fichier Gitignore
+
+# Igorer les fichiers docx
+*.docx
