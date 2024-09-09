@@ -20,7 +20,7 @@ Une réflexion de fond a été menée sur la **modélisation des données (MCD)*
 L'approche "chambres" a été retenue pour sa simplicité, sa facilité de mise en place, d'exploitation et de mise à jour.
 
 Le nettoyage et la structuration des données ont été réalisés à l'aide de l'ETL Talend, qui a permis de mettre en place des procédures de nettoyage, de transformation et de chargement des données.
-Les données ont été stockées dans une base de données Oracle, hébergée sur un serveur Linux (Ubuntu). Un serveur Apache, un serveur MariaDB et un serveur PHP ont été utilisés pour la mise en place d'une interface web permettant de consulter les données . Nous avons utilisé l'outil DBeaver et phpMyAdmin pour la gestion de la base de données, et le requêtage SQL pour l'interrogation des données.
+Les données ont été stockées dans une base de données Oracle, hébergée sur un serveur Linux (Ubuntu). Un serveur Apache, un serveur MariaDB fet un serveur PHP ont été utilisés pour la mise en place d'une interface web permettant de consulter les données . Nous avons utilisé l'outil DBeaver et phpMyAdmin pour la gestion de la base de données, et le requêtage SQL pour l'interrogation des données.
 Cette solution nous a permis d'accéder à la base de données de façon distante (ssh), de donner un accès à la base de données à l'ensemble de l'équipe et même au jury le jour de la soutenance. Les requêtes ont ainsi pu être exécutées en temps réel.
 
 Nos requêtes SQL ont permis de répondre à des questions telles que :
@@ -177,7 +177,7 @@ Une réorganisation de la structure de la base de données pourrait améliorer l
 Pour une utilisation en SQL, il serait avantageux de subdiviser la base en plusieurs tables regroupées autour d'une table d'identification (id).
 
 #### Conclusion de cette partie:
-Pour les besoins de notre projet, nous avons dû ensuite sélectionner les colonnes pertinentes pour la classification des allergènes, et nettoyer les données pour les rendre exploitables. Cette partie est détaillée dans le point suivant (***###REF***).
+Pour les besoins de notre projet, nous avons dû ensuite sélectionner les colonnes pertinentes pour la classification des allergènes, et nettoyer les données pour les rendre exploitables. Cette partie est détaillée dans le point suivant.
 
 
 
